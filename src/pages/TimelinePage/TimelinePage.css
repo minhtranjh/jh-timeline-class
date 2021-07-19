@@ -1,0 +1,25 @@
+
+
+.container{
+    height: 100%;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    width: 100vw;
+    background-color: var(--bg-green);
+}
+.timeline{
+    height: 100%;
+    width: 50%;
+    padding: 50px 0;
+    color: var(--font-white);
+}
+.timeline-title{
+    text-align: center;
+}
+.timeline-title h1{
+    font-size: 40px;
+}
+.timeline h1{
+    font-weight: 700;
+}

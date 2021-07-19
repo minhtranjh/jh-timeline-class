@@ -1,0 +1,17 @@
+.members{
+    padding: 30px 100px;
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+}
+.list-head{
+    display: flex;
+    align-items:center;
+    color: white;
+    margin-bottom: 30px;
+}
+.list-title{
+    margin-right: 20px;
+    font-size: 30px;
+}
+

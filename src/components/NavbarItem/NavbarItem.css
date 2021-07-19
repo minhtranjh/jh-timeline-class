@@ -1,0 +1,9 @@
+.nav-item{
+    display:inline-block;
+    list-style:none;
+    margin-right: 10px;
+    font-size: 15px;
+}
+.nav-link{
+    text-decoration: none;
+}

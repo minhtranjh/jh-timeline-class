@@ -1,0 +1,23 @@
+.datetime-item{
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+    justify-content:center;
+    gap:10px;
+    margin-bottom: 20px;
+}
+.dot{
+    width: 30px;
+    border-radius: 50%;
+    height:30px;
+    background-color:var(--bg-grey)
+}
+.line{
+    width: 5px;
+    border-radius: 4px;
+    height:100px;
+    background-color: var(--bg-lightblue);
+}
+.timeline-item:last-child .line {
+    display:none;
+}

@@ -1,0 +1,16 @@
+.list-wrapper{
+    background-color:var(--font-white);
+    height: 554px;
+    width: 774px;
+    border-radius: 6px;
+}
+.list-members{
+    width:100%;
+    border-collapse: collapse;
+}
+
+.list-members thead tr{
+    text-align: left;
+    color: var(--bg-green);
+    border-bottom: 1px solid var(--bg-green);
+}

@@ -1,0 +1,35 @@
+.basic-info{
+    display:flex;
+    align-items:center;
+}
+.small-avatar{
+    width:70px;
+    height:70px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.basic-info .name{
+    color: var(--bg-green);
+    font-weight: bold;
+}
+.basic-info .email{
+    font-size: 10px;
+}
+.list-members th,.list-members td{
+    padding: 15px 50px;
+    font-size: 13px;
+}
+.list-members tbody tr{
+    border-bottom: 1px solid var(--bg-green);
+}
+.list-members tbody tr:nth-of-type(even){
+    background-color: #f2f2f2;
+}
+.member-link{
+    background-color: var(--bg-green);
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: var(--font-white);
+    font-weight: bold;
+}

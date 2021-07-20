@@ -27,7 +27,14 @@ class MemberDetail extends Component {
         <div className="member-detail">
           <div className="detail-left">
             <div className="avatar-wrapper">
-              <MemberAvatar picture={memberDetails.picture} name={memberDetails.name}/>
+              <MemberAvatar
+                func={
+                  //Why does this cause error?
+                  this.getMemberDetailById
+                }
+                picture={memberDetails.picture}
+                name={memberDetails.name}
+              />
             </div>
           </div>
           <div className="detail-right">

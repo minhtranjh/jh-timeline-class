@@ -15,8 +15,11 @@ class PaginationBar extends Component {
   renderListPageNumber(currentPage) {
     const { totalPages } = this.props;
     let listLiTag = [];
+    //change those variable's name
     let beforeCurrentPage = currentPage - 1;
     let afterCurrentPage = currentPage + 1;
+    //
+
     if (currentPage > 1) {
       const prevButton = this.createPagingPrevButton(currentPage);
       listLiTag.push(prevButton);

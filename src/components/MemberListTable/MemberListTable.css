@@ -1,0 +1,65 @@
+.list-wrapper {
+  height: 404px;
+  width: 330px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  position: relative;
+  color: var(--font-white);
+  border-radius: 6px;
+  backdrop-filter: blur(10px);
+  animation: fadeIn .5s linear;
+  background-color: rgb(209, 209, 209, 0.1);
+}
+.list-members {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.list-members thead tr {
+  text-align: left;
+  color: var(--bg-green);
+  border-bottom: 1px solid var(--bg-green);
+}
+.not-found {
+  text-align: center;
+}
+.not-found td {
+  font-size: 30px;
+  color: var(--font-green);
+  height: 404px;
+  border-bottom: 1px solid transparent;
+}
+.listBody.visible .loadingRow {
+  display: none;
+}
+.listBody .not-found {
+  display: none;
+}
+.listBody.visible .not-found {
+  display: unset;
+}
+.listBody tr:not(:last-child) {
+  opacity: 0;
+  transition: all 0.5s;
+}
+.listBody.visible {
+  opacity: 1;
+}
+
+@media screen and (min-width: 410px) {
+  .list-wrapper {
+    width: 500px;
+  }
+}
+@media screen and (min-width: 748px) {
+  .list-wrapper {
+    width: 774px;
+    height: 554px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .list-wrapper {
+    width: 964px;
+    height: 554px;
+  }
+}

@@ -14,15 +14,18 @@ class MemberListItem extends Component {
             <td>
               <div className="basic-info">
               <div className="small-avatar">
-                  <MemberAvatar picture={memberDetail.picture} name={memberDetail.name}/>
+                  <MemberAvatar picture={memberDetail.picture} name={memberDetail.firstName}/>
                 </div>                <div className="info">
-                  <p className="name">{memberDetail.name}</p>
+                  <p className="name">{memberDetail.firstName + " " + memberDetail.lastName}</p>
                   <p className="email">{memberDetail.email}</p>
                 </div>
               </div>
             </td>
             <td>
               <p className="position">{memberDetail.position}</p>
+            </td>
+            <td>
+              <p className="birth">{memberDetail.joinedDate.toString().slice(4)}</p>
             </td>
             <td>
               <NavLink

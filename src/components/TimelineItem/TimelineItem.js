@@ -4,10 +4,10 @@ import TimelineDatetime from "../TimelineDatetime/TimelineDatetime";
 import "./TimelineItem.css";
 class TimelineStreamItem extends Component {
   render() {
-    const { members, isRight } = this.props;
+    const { members, isRight ,index } = this.props;
     return (
       <div className="timeline-item">
-        <TimelineDatetime joinedDate={members.joinedDate} />
+        <TimelineDatetime index={index} joinedDate={members.joinedDate} />
         <TimelineDetail members={members.members} isRight={isRight} />
       </div>
     );

@@ -1,0 +1,127 @@
+.filterBar {
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-right: 10px;
+}
+.filterSelection.is-active .filterWrapper {
+  min-height: 200px;
+  padding: 0;
+  margin-bottom: 50px;
+
+}
+.fa-plus {
+  transition: all 0.5s;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.fa-plus.is-active {
+  transform: rotate(0deg);
+}
+.filterBar.is-active .filterSelectionTitle {
+  width: 200px;
+}
+.filterSelectionTitle.is-active .filterName{
+  color: var(--font-gold);
+}
+.filterSelection {
+  color: var(--font-white);
+  display: flex;
+  position: absolute;
+  color: var(--font-darkgrey);
+  background-color: var(--bg-white);
+  top: 40px;
+  border-radius: 5px;
+  width: 100%;
+  right: -45px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px -2px 6px -5px rgba(47, 83, 55, 0.83);
+  box-shadow: 0px -2px 6px -5px rgba(47, 83, 55, 0.83);
+  transition: all 0.5s;
+}
+.filterWrapper {
+  position: relative;
+  transition: all 0.5s;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+  margin-bottom: 0;
+  display: flex;
+  height: 0;
+}
+.filterWrapper.is-active .filterBox {
+  left: -100%;
+}
+.filterWrapper.is-active .fieldBox {
+  right: 0%;
+}
+.goBackBtn {
+  background-color: red;
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  color: var(--font-darkgrey);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  outline: none;
+  font-size: 11px;
+}
+.filterBox {
+  width: 100%;
+  left: 0%;
+  position: absolute;
+  transition: all 0.5s;
+  padding: 20px 30px;
+}
+.fieldBox {
+  transition: all 0.5s;
+  width: 100%;
+  right: -100%;
+  padding: 20px 30px;
+
+  position: absolute;
+}
+.filter {
+  /* margin: 20px 30px; */
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.filter:hover::after {
+  width: 100%;
+}
+.filter::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--bg-green);
+  width: 0%;
+  transition: all 0.5s;
+  height: 1px;
+}
+.filterSelectionTitle {
+  width: 0;
+  display: flex;
+
+  overflow: hidden;
+  justify-content: space-between;
+  transition: all 0.5s;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--font-white);
+  cursor: pointer;
+}

@@ -1,0 +1,42 @@
+ .searchInput {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--font-white);
+  padding-bottom: 10px;
+  width:0;
+  transition: all .5s;
+}
+.searchInput::placeholder {
+  color: var(--font-white);
+}
+.search-bar{
+  position: relative;
+  display: flex;
+}
+.input-line.is-focus {
+    width:100%
+}
+
+.input-line {
+  width: 0;
+  height: 3px;
+  transition: all .6s;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  background-color: var(--font-green);
+}
+.search-bar.is-active .searchInput{
+  border-bottom: 1px solid var(--font-white);
+    width: 200px;
+}
+.filterButton{
+    padding:5px 10px;
+    margin-right: 10px;
+    background-color:transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--font-white);
+    border: 1px solid var(--font-white);
+}

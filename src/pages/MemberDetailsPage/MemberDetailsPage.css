@@ -1,0 +1,45 @@
+
+.backBtnWrapper{
+    align-items:center;
+    display: flex;
+    justify-content:center;
+}
+.backBtn{
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    position: relative;
+   
+}
+
+.backBtn:hover::after{
+    height :0;
+}
+.backBtn button{
+    cursor: pointer;
+    color: var(--font-white);
+    font-family: var(--font-roseritta);
+    border: none;
+    outline: none;
+    background-color:transparent;
+}
+@media screen and (min-width: 768px) {
+    .backBtn::after{
+        content :"";
+        position: absolute;
+        height:50px;
+        bottom: 40px;
+        width:1px;
+        transition: all .5s;
+        background-color: var(--font-white);
+    }
+    .backBtn::before{
+        content :"";
+        position: absolute;
+        top: -20px;
+        height :7px;
+        width:7px;
+        border-radius: 50%;
+        background-color: var(--font-white);
+    }
+}

@@ -1,0 +1,178 @@
+.treeWrap{
+  animation: fadeIn .5s linear;
+}
+.familyTree {
+  width: 100vw;
+  transition: all 0.5s;
+  overflow-x:scroll;
+}
+.familyTree::-webkit-scrollbar{
+  display:none;
+  height:0;
+}
+.familyTree ul {
+  position: relative;
+  transition: all 0.5s;
+  display:flex;
+}
+.nodeDetails{
+  display: flex;
+  flex-direction: column;
+}
+.nodeDetails p:first-child{
+  font-size: 14px;
+
+}
+.nodeDetails p:last-child{
+  font-size: 12px;
+  color: var(--font-gold);
+}
+.familyTree li {
+  display: inline-table;
+  text-align: center;
+  list-style: none;
+  position: relative;
+  padding: 10px;
+  transition: all 0.5s;
+}
+.familyTree li::before,
+.familyTree li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  border-top: 1px solid var(--font-white);
+  transition: all 0.5s;
+  width: 50%;
+  height:10px;
+  animation:  connectVerticalLine .5s ,connectHoritalLine  .5s;
+}
+.familyTree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 1px solid var(--font-white);
+}
+.familyTree li:only-child:after,
+.familyTree li:only-child::before {
+  display: none;
+}
+.familyTree li:only-child {
+  padding-top: 0px;
+}
+.familyTree li:first-child:before,
+.familyTree li:last-child::after {
+  border: 0 none;
+}
+.familyTree li:last-child::before {
+  border-right: 1px solid var(--font-white);
+  border-radius: 0 5px 0 0;
+}
+.familyTree li:first-child::after {
+  border-radius: 5px 0 0 0;
+}
+
+.familyTree ul ul:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 1px solid var(--font-white);
+  width: 0;
+  height:0;
+}
+.familyTree ul::before{
+  transition: all 0.5s;
+}
+.familyTree ul.isActive::before {
+  height: 20px;
+}
+.familyTree a {
+  
+  border: 1px solid var(--font-white);
+  border-radius: 5px;
+  padding: 5px 10px;
+  text-decoration: none;
+  align-items: center;
+  color: var(--font-white);
+  display: inline-flex;
+}
+@keyframes setHeight{
+  0% {
+    height:  0;
+  }
+  100%{
+    height : 20px
+  }
+}
+.familyTree li {
+  margin-top: 19px;
+  display:none;
+  cursor: pointer;
+}
+
+.familyTree li a:hover ,
+.familyTree li a:hover  img,
+.familyTree li a:hover  span,
+.familyTree li a:hover  + ul li a {
+  border: 1px solid var(--font-gold);
+  background-color: rgb(209, 209, 209, 0.1);
+  backdrop-filter: blur(10px);
+}
+.familyTree li a:hover + ul li:after,
+.familyTree li a:hover + ul li:before,
+.familyTree li a:hover + ul:before,
+.familyTree li a:hover + ul ul:before {
+  border-color: var(--font-gold);
+}
+.nodeAvatar{
+  width: 50px;
+  margin-right: 10px;
+  height:50px;
+  border-radius: 50%;
+}
+@media screen and (min-width: 768px) {
+  .familyTree ul{
+    justify-content: center;
+  }
+}
+@media screen and (min-width: 1024px) {
+ 
+  .familyTree a {
+    padding: 20px 30px;
+  }
+}
+
+@keyframes connectHoritalLine{
+  0%{
+    width: 0;
+  }
+  100%{
+    width: 50%;
+
+  }
+}
+@keyframes connectVerticalLine{
+  0%{
+    height: 0;
+  }
+  100%{
+    height: 10px;
+
+  }
+}
+@keyframes hideChild {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity : 0;
+  }
+}
+@keyframes showChild{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity :1;
+  }
+}

@@ -1,30 +1,46 @@
-.hamburger-button{
-    display:flex;
-    background-color:transparent;
+.hamburger-button {
+    display: flex;
+    background-color: transparent;
     outline: none;
-    border:none;
+    border: none;
     flex-direction: column;
-    transition: all .5s;
+    transition: all 0.5s;
     cursor: pointer;
     row-gap: 8px;
-}
-.stack{
-    width: 40px;
-    height:5px;
-    transition: all .5s;
-    border-radius: 5px;
-    background-color:var(--bg-white);
-}
-.stack:nth-child(2){
+    border-radius: 50%;
+    border: 1px solid var(--font-white);
+    padding: 20px;
+  }
+  .stack {
+    width: 20px;
+    height: 1px;
+    transition: all 0.5s;
+    border-radius: 2px;
+    background-color: var(--bg-white);
+  }
+  .stack:nth-child(2) {
     transition: none;
-}
-.hamburger-button.is-open .stack:nth-child(2){
-   opacity:0;
-}
-
-.hamburger-button.is-open .stack:nth-child(1){
-    transform:rotate(-45deg) translateY(18px) ;
-}
-.hamburger-button.is-open .stack:nth-child(3){
-    transform:rotate(45deg) translateY(-18px) ;
-}
+  }
+  .hamburger-button.is-open .stack:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger-button.is-open .stack:nth-child(1) {
+    transform: rotate(-45deg) translateX(-6px) translateY(6.5px);
+  }
+  .hamburger-button.is-open .stack:nth-child(3) {
+    transform: rotate(45deg) translateX(-6px) translateY(-6.5px);
+  }
+  @media screen and (min-width: 768px) {
+    .stack {
+      width: 20px;
+      height: 1px;
+    }
+    .hamburger-button.is-open .stack:nth-child(1) {
+      transform: rotate(-45deg) translateX(-6px) translateY(6.5px);
+    }
+    .hamburger-button.is-open .stack:nth-child(3) {
+      transform: rotate(45deg) translateX(-6px) translateY(-6.5px);
+    }
+  }
+  

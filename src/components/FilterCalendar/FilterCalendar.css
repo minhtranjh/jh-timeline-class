@@ -1,0 +1,15 @@
+.calendarBar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-right: 10px;
+  }
+  .calendarBar.is-active .searchInput{
+    border-bottom: 1px solid var(--font-white);
+    width: 200px;
+  }
+  .calendarBar .searchInput::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}

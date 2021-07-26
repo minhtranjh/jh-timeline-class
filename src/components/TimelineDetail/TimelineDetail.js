@@ -11,7 +11,7 @@ class TimelineDetail extends Component {
             {" "}
             {members.length > 1
               ? `${members.length} Members `
-              : members[0].name + " "}
+              : members[0].firstName  + " " + members[0].lastName  + " "}
             has joined
           </p>
         </div>

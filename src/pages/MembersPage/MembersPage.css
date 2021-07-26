@@ -1,17 +1,46 @@
 .members{
-    padding: 30px 100px;
+    padding: 30px 10px;
     display:flex;
     align-items:center;
     flex-direction: column;
 }
 .list-head{
     display: flex;
-    align-items:center;
+    align-items:flex-end;
     color: white;
     margin-bottom: 30px;
+    width:80%;
+    justify-content: space-between;
 }
 .list-title{
     margin-right: 20px;
+    font-family: var(--font-roseritta);
     font-size: 30px;
 }
+.filterOption{
+    display: flex;
+    align-items:center;
+    z-index: 1;
+}
+.showInBtn{
+    margin-top: 10px;
+}
+.showInBtn button{
+    margin-right: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: var(--font-white);
+    background:transparent;
+    border: 1px solid var(--font-white);
+    border-radius: 5px;
+}
+.listType.isActive{
+    color: var(--font-green);
+    border: 1px solid var(--font-green);
 
+}
+@media screen and (min-width:768px) {
+    .members{
+        padding: 30px 100px;
+    }
+}

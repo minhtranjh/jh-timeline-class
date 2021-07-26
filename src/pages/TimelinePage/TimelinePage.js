@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TimelineStream from "../../components/TimelineTree/TimelineTree";
+import TimelineTree from "../../components/TimelineTree/TimelineTree";
 import { MembersContext } from "../../context/MembersContext";
 import "./TimelinePage.css";
 class TimelinePage extends Component {
@@ -12,7 +12,7 @@ class TimelinePage extends Component {
             <h1>Journey Horizon</h1>
           </div>
           <MembersContext.Consumer>
-            {({listMembers}) => <TimelineStream listMembers={listMembers} />}
+            {({listMembers,isLoading}) => <TimelineTree  isLoading={isLoading} listMembers={listMembers} />}
           </MembersContext.Consumer>
         </div>
       </div>

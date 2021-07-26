@@ -1,0 +1,110 @@
+.sliderWrapper {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  border-radius: 6px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  background-color: rgb(209, 209, 209, 0.1);
+  width: 100%;
+  animation: fadeIn .5s linear;
+}
+.slider {
+  display: flex;
+  transition: all 0.5s;
+}
+.slide {
+  padding: 10px;
+  color: var(--font-white);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.5s;
+  min-width: calc(100% / 1);
+}
+.slideName {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.slideBirth,
+.slidePosition {
+  opacity: 0;
+}
+.slideDetails {
+  padding: 10px;
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  font-size: 12px;
+  transition: all 0.5s;
+}
+.slide:hover {
+  transform: scale(1.2);
+  color: var(--font-green);
+}
+.slide:hover .slideDetails {
+  background-color: var(--bg-white);
+}
+.slide:hover .slideBirth,
+.slide:hover .slidePosition {
+  opacity: 1;
+}
+.slideImg {
+  width: 100%;
+  border-radius: 5px;
+}
+.slideDetails {
+  margin-top: 10px 0;
+  border-radius: 5px;
+}
+.sliderButtons {
+  margin: 30px 10px;
+  align-items: center;
+  column-gap: 30px;
+  display: flex;
+  color: var(--font-white);
+}
+.sliderPrevBtn,
+.sliderNextBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  cursor: pointer;
+  height: 50px;
+  border: 1px solid var(--font-white);
+  transition: all 0.5s;
+  border-radius: 50%;
+}
+.sliderPrevBtn:hover,
+.sliderNextBtn:hover {
+  transform: scale(1.1);
+  border: 1px solid var(--font-green);
+  color: var(--font-green);
+}
+.sliderNumber {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+.sliderNumber div {
+  background-color: var(--font-white);
+  width: 100px;
+  height: 1px;
+}
+
+@media screen and (min-width: 768px) {
+  .slide {
+    padding: 10px;
+    color: var(--font-white);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.5s;
+    min-width: calc(100% / 5);
+  }
+}
+

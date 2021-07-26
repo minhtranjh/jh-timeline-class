@@ -9,9 +9,8 @@ class RollingDownMemberList extends Component {
         {members.map((item) => (
           <div key={item.id} className="popup-item">
             <NavLink className="popup-link" to={`/member/${item.id}`}>
-              <p>Name :{item.name}</p>
-              <p>Age : {item.age}</p>
-              <p>Position : {item.position}</p>
+              <p>{item.firstName + " " + item.lastName}</p>
+              <p>{item.position}</p>
             </NavLink>
           </div>
         ))}

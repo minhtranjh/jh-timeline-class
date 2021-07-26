@@ -5,7 +5,12 @@ class PaginationBar extends Component {
     listLiTag: [],
   };
   componentDidMount() {
-    this.pagingListMember();
+    this.renderListPageNumber(this.props.currentPage);
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.isLoading !== this.props.isLoading) {
+      this.renderListPageNumber(this.props.currentPage);
+    }
   }
   pagingListMember(currentPage = this.props.currentPage) {
     this.props.handlePagingListMember(currentPage);
@@ -15,8 +20,8 @@ class PaginationBar extends Component {
   renderListPageNumber(currentPage) {
     const { totalPages } = this.props;
     let listLiTag = [];
-    let beforeCurrentPage = currentPage - 1;
-    let afterCurrentPage = currentPage + 1;
+    let numsBeforeCurrentPage = currentPage - 1;
+    let numsAfterCurrentPage = currentPage + 1;
     if (currentPage > 1) {
       const prevButton = this.createPagingPrevButton(currentPage);
       listLiTag.push(prevButton);
@@ -30,18 +35,18 @@ class PaginationBar extends Component {
       listLiTag.push(dots);
     }
     if (currentPage === totalPages) {
-      beforeCurrentPage = beforeCurrentPage - 2;
+      numsBeforeCurrentPage = numsBeforeCurrentPage - 2;
     } else if (currentPage === totalPages - 1) {
-      beforeCurrentPage = beforeCurrentPage - 1;
+      numsBeforeCurrentPage = numsBeforeCurrentPage - 1;
     }
     if (currentPage === 1) {
-      afterCurrentPage = afterCurrentPage + 2;
+      numsAfterCurrentPage = numsAfterCurrentPage + 2;
     } else if (currentPage === 2) {
-      afterCurrentPage = afterCurrentPage + 1;
+      numsAfterCurrentPage = numsAfterCurrentPage + 1;
     }
     for (
-      let pageNum = beforeCurrentPage;
-      pageNum <= afterCurrentPage;
+      let pageNum = numsBeforeCurrentPage;
+      pageNum <= numsAfterCurrentPage;
       pageNum++
     ) {
       if (pageNum > totalPages) {

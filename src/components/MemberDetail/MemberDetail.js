@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import AnimatedLoadingIcon from "../AnimatedLoadingIcon/AnimatedLoadingIcon";
 import "./MemberDetail.css";
 class MemberDetail extends Component {
@@ -39,6 +40,9 @@ class MemberDetail extends Component {
   render() {
     const { memberDetails, translateX } = this.state;
     const { isSpecificMemberLoading } = this.props;
+    if(!memberDetails){
+      return (<Redirect to="/404"/>)
+    }
     return (
       <div
         className={

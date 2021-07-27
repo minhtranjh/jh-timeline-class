@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import Container from "../../components/Container/Container";
 import TimelineTree from "../../components/TimelineTree/TimelineTree";
 import { MembersContext } from "../../context/MembersContext";
 import "./TimelinePage.css";
 class TimelinePage extends Component {
   render() {
     return (
-      <div className="container">
+      <Container>
+        <div className="timelinePage">
         <div className="timeline">
           <div className="timeline-title">
             <p>A Story Of</p>
@@ -16,6 +18,7 @@ class TimelinePage extends Component {
           </MembersContext.Consumer>
         </div>
       </div>
+      </Container>
     );
   }
 }

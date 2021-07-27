@@ -9,6 +9,7 @@
   .calendarBar.is-active .searchInput{
     border-bottom: 1px solid var(--font-white);
     width: 200px;
+    color: var(--font-gold);
   }
   .calendarBar .searchInput::-webkit-calendar-picker-indicator {
     filter: invert(1);

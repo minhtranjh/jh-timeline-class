@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Container from "../../components/Container/Container";
 import MemberDetail from "../../components/MemberDetail/MemberDetail";
 import { MembersContext } from "../../context/MembersContext";
 import "./MemberDetailsPage.css";
@@ -7,13 +8,12 @@ class MemberDetailsPage extends Component {
     super(props);
     this.handleGoBack = this.handleGoBack.bind(this);
   }
-  handleGoBack(e) {
+  handleGoBack() {
     this.props.history.goBack();
   }
   render() {
-    console.log(this.props.history);
     return (
-      <>
+      <Container>
         <div className="backBtnWrapper">
           <div className="backBtn" onClick={this.handleGoBack}>
             <button>Back</button>
@@ -29,7 +29,7 @@ class MemberDetailsPage extends Component {
             />
           )}
         </MembersContext.Consumer>
-      </>
+      </Container>
     );
   }
 }

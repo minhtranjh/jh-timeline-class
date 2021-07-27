@@ -17,7 +17,10 @@ class App extends Component {
     const MemberFamilyTreePage = lazy(() =>
       import("./pages/MemberFamilyTreePage/MemberFamilyTreePage")
     );
-
+    const NotFoundPage = lazy(() =>
+      import("./pages/NotFoundPage/NotFoundPage")
+    );
+    
     return (
       <Router>
         <Layout>
@@ -46,6 +49,8 @@ class App extends Component {
                   path="/member/:id"
                   render={(props) => <MemberDetailsPage {...props} />}
                 />
+                <Route path='*' exact={true} render={(props)=><NotFoundPage {...props}/>} />
+
               </Switch>
             </Suspense>
           </MembersProvider>

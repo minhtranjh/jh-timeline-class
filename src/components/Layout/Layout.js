@@ -9,8 +9,8 @@ class Layout extends Component {
             <>
             <Navbar />
             <BubbleBackground/>
-            <Footer/>
             {this.props.children}
+            <Footer/>
             </>
         );
     }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Container from "../../components/Container/Container";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import FilterCalendar from "../../components/FilterCalendar/FilterCalendar";
 import MemberListSlider from "../../components/MemberListSlider/MemberListSlider";
@@ -105,82 +106,87 @@ class MembersPage extends Component {
           handleFindMemberByQuery,
           handleFilterByJoinedDate,
         }) => (
-          <div className="members">
-            <div className="list-head">
-              <div>
-                <h2 className="list-title">Members</h2>
-                <p className="member-count">{listMembers.length} Total</p>
-                <div className="showInBtn">
-                  <button
-                    className={
-                      listType === "slider" ? "listType isActive" : "listType"
-                    }
-                    onClick={() => this.handleChangeListType("slider")}
-                  >
-                    <i className="far fa-clone"></i>
-                  </button>
-                  <button
-                    className={
-                      listType === "table" ? "listType isActive" : "listType"
-                    }
-                    onClick={() => this.handleChangeListType("table")}
-                  >
-                    <i className="fas fa-table"></i>
-                  </button>
+          <Container>
+            <div className="members">
+              <div className="list-head">
+                <div>
+                  <h2 className="list-title">Members</h2>
+                  <p className="member-count">{listMembers.length} Total</p>
+                  <div className="showInBtn">
+                    <button
+                      className={
+                        listType === "slider" ? "listType isActive" : "listType"
+                      }
+                      onClick={() => this.handleChangeListType("slider")}
+                    >
+                      <i className="far fa-clone"></i>
+                    </button>
+                    <button
+                      className={
+                        listType === "table" ? "listType isActive" : "listType"
+                      }
+                      onClick={() => this.handleChangeListType("table")}
+                    >
+                      <i className="fas fa-table"></i>
+                    </button>
+                  </div>
                 </div>
+                {listType === "table" && (
+                  <div className=" filterOption">
+                    <button onClick={()=>handleFilterByFeature()} className="clearFilterButton filterButton">
+                      Clear
+                    </button>
+                    <FilterCalendar
+                      func={this.func}
+                      handleFilterByJoinedDate={handleFilterByJoinedDate}
+                      handleToggleCalendarBar={this.handleToggleCalendarBar}
+                    />
+                    <PositionsProvider>
+                      <PositionsContext.Consumer>
+                        {({ listPositions, isLoading }) => (
+                          <FilterBar
+                            isLoading={isLoading}
+                            listPositions={listPositions}
+                            isFilterSelectionOpen={
+                              this.state.isFilterSelectionOpen
+                            }
+                            handleFilterByFeature={handleFilterByFeature}
+                            handleToggleFilterBar={this.handleToggleFilterBar}
+                            toggleFilterSelection={this.toggleFilterSelection}
+                          />
+                        )}
+                      </PositionsContext.Consumer>
+                    </PositionsProvider>
+                    <SearchBar
+                      handleToggleSearchInput={this.handleToggleSearchInput}
+                      handleFindMemberByQuery={handleFindMemberByQuery}
+                    />
+                  </div>
+                )}
               </div>
-              {listType === "table" && (
-                <div className="filterOption">
-                  <FilterCalendar
-                  func={this.func}
-                    handleFilterByJoinedDate={handleFilterByJoinedDate}
-                    handleToggleCalendarBar={this.handleToggleCalendarBar}
+              {listType === "slider" ? (
+                <MemberListSlider
+                  totalPages={totalPages}
+                  isLoading={isLoading}
+                  listMembers={listMembers}
+                />
+              ) : (
+                <>
+                  <MemberListTable
+                    isLoading={isLoading}
+                    listMembers={pagedList}
                   />
-                  <PositionsProvider>
-                    <PositionsContext.Consumer>
-                      {({ listPositions, isLoading }) => (
-                        <FilterBar
-                          isLoading={isLoading}
-                          listPositions={listPositions}
-                          isFilterSelectionOpen={
-                            this.state.isFilterSelectionOpen
-                          }
-                          handleFilterByFeature={handleFilterByFeature}
-                          handleToggleFilterBar={this.handleToggleFilterBar}
-                          toggleFilterSelection={this.toggleFilterSelection}
-                        />
-                      )}
-                    </PositionsContext.Consumer>
-                  </PositionsProvider>
-                  <SearchBar
-                    handleToggleSearchInput={this.handleToggleSearchInput}
-                    handleFindMemberByQuery={handleFindMemberByQuery}
+                  <PaginationBar
+                    isLoading={isLoading}
+                    totalPages={10}
+                    listMembers={pagedList}
+                    currentPage={currentPage}
+                    handlePagingListMember={handlePagingListMember}
                   />
-                </div>
+                </>
               )}
             </div>
-            {listType === "slider" ? (
-              <MemberListSlider
-                totalPages={totalPages}
-                isLoading={isLoading}
-                listMembers={listMembers}
-              />
-            ) : (
-              <>
-                <MemberListTable
-                  isLoading={isLoading}
-                  listMembers={pagedList}
-                />
-                <PaginationBar
-                  isLoading={isLoading}
-                  totalPages={10}
-                  listMembers={pagedList}
-                  currentPage={currentPage}
-                  handlePagingListMember={handlePagingListMember}
-                />
-              </>
-            )}
-          </div>
+          </Container>
         )}
       </MembersContext.Consumer>
     );

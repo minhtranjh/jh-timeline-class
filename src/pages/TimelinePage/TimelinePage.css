@@ -1,15 +1,13 @@
-.container{
+.timelinePage{
     height: 100%;
     display: flex;
     align-items:center;
     justify-content:center;
     width: 100vw;
-
     }
 .timeline{
     height: 100%;
     width: 100%;
-    padding: 50px 20px;
     color: var(--font-white);
 }
 .timeline-title{

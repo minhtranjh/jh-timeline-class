@@ -107,7 +107,6 @@
 .familyTree li {
   margin-top: 19px;
   display:none;
-  cursor: pointer;
 }
 
 .familyTree li a:hover ,

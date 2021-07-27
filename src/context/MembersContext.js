@@ -39,7 +39,32 @@ class MembersProvider extends Component {
       isLoading: false,
     });
   }
-
+  async getPositionById(positionId) {
+    const getPositionSnap = await this.positionTbRef.doc(positionId).get();
+    return getPositionSnap.exists
+      ? { ...getPositionSnap.data(), id: getPositionSnap.id }
+      : undefined;
+  }
+  async getTeamById(teamId) {
+    const getTeamSnap = await this.teamTbRef.doc(teamId).get();
+    return getTeamSnap.exists
+      ? { ...getTeamSnap.data(), id: getTeamSnap.id }
+      : undefined;
+  }
+  async getTeamNameByLeaderId(leaderId) {
+    let team;
+    const getTeamByLeaderIdSnap = await this.teamTbRef
+      .where("leaderId", "==", leaderId)
+      .get();
+    getTeamByLeaderIdSnap.forEach((doc) => {
+      team = { ...doc.data(), id: doc.id };
+    });
+    return team;
+  }
+  async getManagedByLeaderId(leaderId) {
+    const snap = await this.membersTbRef.doc(leaderId).get();
+    return snap.exists ? { ...snap.data(), id: snap.id } : undefined;
+  }
   fetchMemberListFromFirebase() {
     this.setState({ isLoading: true });
     const unsubscribe = this.membersTbRef
@@ -47,49 +72,30 @@ class MembersProvider extends Component {
       .onSnapshot((snap) => {
         const listMembers = [];
         let index = 0;
-        snap.forEach(async (member) => {
-          let leaderOf;
+        snap.forEach(async (doc) => {
           let managedBy;
-          const getPositionSnap = await this.positionTbRef
-            .doc(member.data().position)
-            .get();
-          const getTeamByIdSnap = await this.teamTbRef
-            .doc(member.data().teamId)
-            .get();
-          const getTeamByLeaderIdSnap = await this.teamTbRef
-            .where("leaderId", "==", member.id)
-            .get();
-            getTeamByLeaderIdSnap.forEach((doc) => {
-            leaderOf = doc.data();
-          });
-          if (getTeamByIdSnap.exists) {
-            managedBy = await this.membersTbRef
-              .doc(getTeamByIdSnap.data().leaderId)
-              .get();
+          const member = { ...doc.data(), id: doc.id };
+          const memberPosition = await this.getPositionById(member.position);
+          const team = await this.getTeamById(member.teamId);
+          const leaderOfTeam = await this.getTeamNameByLeaderId(member.id);
+          if (team) {
+            managedBy = await this.getManagedByLeaderId(team.leaderId);
           }
-          const formattedJoinedDate = member
-            .data()
-            .joinedDate.toDate()
-            .toDateString();
+          const formattedJoinedDate = member.joinedDate.toDate().toDateString();
           listMembers.push({
-            ...member.data(),
+            ...member,
             id: member.id,
-            team: getTeamByIdSnap.exists
-              ? getTeamByIdSnap.data().name
-              : undefined,
-            name: member.data().firstName + " " + member.data().lastName,
-            leaderOf: leaderOf ? leaderOf.name : undefined,
+            team: team ? team.name : undefined,
+            name: member.firstName + " " + member.lastName,
+            leaderOf: leaderOfTeam ? leaderOfTeam.name : undefined,
             managedBy: managedBy
               ? {
-                  name:
-                    managedBy.data().firstName +
-                    " " +
-                    managedBy.data().lastName,
+                  name: managedBy.firstName + " " + managedBy.lastName,
                   id: managedBy.id,
                 }
               : undefined,
             joinedDate: formattedJoinedDate,
-            position: getPositionSnap.data().name,
+            position: memberPosition ? memberPosition.name : undefined,
           });
           index++;
           if (this.isDoneLoopingSnapshot(index, snap.size)) {
@@ -145,6 +151,7 @@ class MembersProvider extends Component {
     });
   }
   handleFilterByFeature(featName, feat) {
+    console.log(featName,feat);
     if (!featName) {
       this.handlePagingListMember(1);
       return;
@@ -179,12 +186,19 @@ class MembersProvider extends Component {
     return memberDetails;
   }
   async fetchMemberFromFirebaseById(id) {
-    const member = await this.membersTbRef.doc(id).get();
-    const position = await this.positionTbRef.doc(member.data().position).get();
+    const memberSnap = await this.membersTbRef.doc(id).get();
+    if (!memberSnap.exists) {
+      return;
+    }
+    const member = memberSnap.data();
+    const positionSnap = await this.positionTbRef.doc(member.position).get();
+    if (!positionSnap.exists) {
+      return;
+    }
     const memberDetail = {
-      ...member.data(),
-      joinedDate: member.data().joinedDate.toDate().toDateString(),
-      position: position.data().name,
+      ...member,
+      joinedDate: member.joinedDate.toDate().toDateString(),
+      position: positionSnap.data().name,
     };
     return memberDetail;
   }
@@ -197,6 +211,7 @@ class MembersProvider extends Component {
       listMembers,
       pagedList,
     } = this.state;
+    console.log(listMembers);
     return (
       <MembersContext.Provider
         value={{

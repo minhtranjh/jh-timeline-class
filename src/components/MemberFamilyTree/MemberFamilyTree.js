@@ -64,6 +64,8 @@ class MemberFamilyTree extends Component {
     this.handleRenderFamilyTree = this.handleRenderFamilyTree.bind(this);
     this.createHtmlForMemberTree = this.createHtmlForMemberTree.bind(this);
     this.handleCreateTreeData = this.handleCreateTreeData.bind(this);
+    this.debounce = this.debounce.bind(this);
+    this.debounceTimeout = React.createRef().current;
   }
   componentDidMount() {
     this.handleRenderFamilyTree();
@@ -95,39 +97,48 @@ class MemberFamilyTree extends Component {
       htmlRenderMembersTree: html,
     });
   }
-  handleToggleNodeConnectedArrow(ulRef, index) {
-    let ulElement = ulRef.current.querySelectorAll(".list")[index];
+  handleToggleNodeConnectionLine(ulRef, level, index) {
+    let liTag = ulRef.current.querySelectorAll(
+      `.level${level - 1}_${level - 1}`
+    )[index];
+    let ulElement = liTag.querySelector(".list");
     if (ulElement) {
       ulElement.classList.toggle("isActive");
-      return;
     }
-    ulElement = ulRef.current.querySelector(".list");
-    ulElement && ulElement.classList.toggle("isActive");
   }
-  toggleChildren(e, liRef, level) {
-    e.stopPropagation();
-    let i = setTimeout(() => {
+  toggleChildren(liRef, level) {
+    let toggleChildrenTimeout = setTimeout(() => {
       const element = liRef.current;
       let liTagsElement = element.querySelectorAll(`.level${level}_${level}`);
       liTagsElement.forEach((el) => {
         if (el.style.display === "none") {
-          el.style.animation = "showChild 1s linear";
+          el.style.animation = "showChild .6s";
           el.style.display = "inline-table";
         } else {
-          el.style.animation = "hideChild .5s ";
-          let a = setTimeout(() => {
+          el.style.animation = "hideChild .3s ";
+          let displayNoneTimeout = setTimeout(() => {
             el.style.display = "none";
-            clearTimeout(a);
-          }, 500);
+            clearTimeout(displayNoneTimeout);
+          }, 300);
         }
+        clearTimeout(toggleChildrenTimeout);
       });
-      clearTimeout(i);
-    }, 500);
+    }, 300);
   }
-
+  debounce(func, timeout = 300) {
+    if (this.debounceTimeout) {
+      clearTimeout(this.debounceTimeout);
+    }
+    this.debounceTimeout = setTimeout(() => {
+      func();
+    }, timeout);
+  }
   handleToggleChildren(e, liRef, nextLevel, ulRef, index) {
-    this.handleToggleNodeConnectedArrow(ulRef, index);
-    this.toggleChildren(e, liRef, nextLevel);
+    e.stopPropagation();
+    this.debounce(() => {
+      this.handleToggleNodeConnectionLine(ulRef, nextLevel, index);
+      this.toggleChildren(liRef, nextLevel);
+    });
   }
   createHtmlForMemberTree(children) {
     const ulRef = React.createRef();
@@ -141,17 +152,19 @@ class MemberFamilyTree extends Component {
               className={`level${child.level}_${child.level}`}
               style={{ display: child.level === 0 ? "inline-table" : "none" }}
               key={child.data.id}
-              onClick={(e) =>
-                this.handleToggleChildren(
-                  e,
-                  liTagRef,
-                  child.level + 1,
-                  ulRef,
-                  index
-                )
-              }
             >
-              <NavLink to="#">
+              <NavLink
+                onClick={(e) => {
+                  this.handleToggleChildren(
+                    e,
+                    liTagRef,
+                    child.level + 1,
+                    ulRef,
+                    index
+                  );
+                }}
+                to="#"
+              >
                 <img className="nodeAvatar" src={child.data.picture} alt="" />
                 <div className="nodeDetails">
                   <p>{child.data.name} </p>

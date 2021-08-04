@@ -6,13 +6,15 @@
   margin-bottom: 200px;
   gap: 10px;
   font-size: 12px;
+  text-align: center;
   color: var(--font-gold);
 }
 .dot {
-  width: 20px;
   border-radius: 50%;
   position: relative;
   transition: all 0.5s;
+  width: 20px;
+
   height: 20px;
   cursor: pointer;
   border: 1px solid var(--bg-grey);
@@ -57,14 +59,13 @@
 .eclipse {
   position: absolute;
   border: 1px solid rgb(255, 255, 255);
-  top: -250%;
-  left: -300%;
+  top: -100%;
+  left: -100%;
 }
 .eclipse:nth-child(1) {
-  width: 124px;
-  height: 115px;
+  width: 56px;
+  height: 55px;
   opacity: 0.5;
-
   -webkit-animation: spin 5s linear infinite;
   -moz-animation: spin 5s linear infinite;
   animation: spin 5s linear infinite;
@@ -72,9 +73,9 @@
 }
 .eclipse:nth-child(2) {
   opacity: 0.1;
+  width: 60px;
+  height: 58px;
 
-  width: 120px;
-  height: 117px;
   -webkit-animation: spin 6s linear infinite;
   -moz-animation: spin 6s linear infinite;
   animation: spin 6s linear infinite;
@@ -82,22 +83,49 @@
 }
 .eclipse:nth-child(3) {
   opacity: 0.5;
-  width: 125px;
-  height: 120px;
+  width: 52px;
+  height: 50px;
   -webkit-animation: spin 6s linear infinite;
   -moz-animation: spin 6s linear infinite;
   animation: spin 6s linear infinite;
   border-radius: 50%;
 }
 .eclipse:nth-child(4) {
-  width: 130px;
+  width: 58px;
+  height: 55px;
   opacity: 0.2;
 
-  height: 120px;
   -webkit-animation: spin 6s linear infinite;
   -moz-animation: spin 6s linear infinite;
   animation: spin 6s linear infinite;
   border-radius: 50%;
+}
+.datetime{
+  margin-top: 20px;
+}
+@media screen and (min-width: 768px) {
+  .datetime{
+    margin-top: initial;
+  }
+ .eclipse{ top: -250%;
+  left: -300%;
+}
+  .eclipse:nth-child(1) {
+    width: 124px;
+    height: 115px;
+  }
+  .eclipse:nth-child(2) {
+    width: 120px;
+    height: 117px;
+  }
+  .eclipse:nth-child(3) {
+    width: 125px;
+    height: 120px;
+  }
+  .eclipse:nth-child(4) {
+    width: 130px;
+    height: 120px;
+  }
 }
 @-moz-keyframes spin {
   100% {

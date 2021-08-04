@@ -8,8 +8,6 @@ class NavbarList extends Component {
         <NavbarItem onClick={handleToggleMenu} path="/" label="Home" />
         <NavbarItem onClick={handleToggleMenu} path="/members" label="Our Members" />
         <NavbarItem onClick={handleToggleMenu} path="/tree" label="Our Organization" />
-        <NavbarItem onClick={handleToggleMenu} path="/contact" label="Contact" />
-        <NavbarItem onClick={handleToggleMenu} path="/contact" label="About" />
       </ul>
     );
   }

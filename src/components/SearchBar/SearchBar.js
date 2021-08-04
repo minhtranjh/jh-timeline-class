@@ -16,7 +16,7 @@ class SearchBar extends Component {
   render() {
     const { handleToggleSearchInput } = this.props;
     return (
-      <div className="search-bar">
+      <div className="filterChoice search-bar">
         <button onClick={handleToggleSearchInput} className="filterButton">
           <i className="fas fa-search"></i>
         </button>

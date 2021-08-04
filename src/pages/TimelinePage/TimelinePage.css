@@ -1,5 +1,6 @@
 .timelinePage{
     height: 100%;
+    overflow-x: hidden;
     display: flex;
     align-items:center;
     justify-content:center;
@@ -24,7 +25,13 @@
     font-weight: 700;
 }
 
-@media screen and (min-width:768px) {
+@media screen and (min-width:768px){
+    .timeline{
+        max-width:73%;
+    }
+}
+
+@media screen and (min-width:1024px) {
     .timeline-title h1{
         font-size: 40px;
     }

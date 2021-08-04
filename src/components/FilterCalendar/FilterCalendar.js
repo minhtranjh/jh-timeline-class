@@ -17,17 +17,18 @@ class FilterCalendar extends Component {
   }
   render() {
     const { value } = this.state;
-    const { handleToggleCalendarBar } = this.props;
+    const { handleToggleCalendarBar,handleFilterByJoinedDate } = this.props;
     return (
-      <div className="calendarBar">
+      <div className="filterChoice calendarBar">
         <button onClick={handleToggleCalendarBar} className="filterButton">
           <i className="fas fa-calendar-alt"></i>{" "}
         </button>
         <input
           value={value}
-          onChange={this.handleOnChange}
+          onChange={handleFilterByJoinedDate}
           className="searchInput"
           type="month"
+          name="joinedDate"
           placeholder={new Date()}
         />
         

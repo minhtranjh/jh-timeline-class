@@ -25,11 +25,11 @@ class TimelineTree extends Component {
   handleAnimateScrolledElement() {
     const timelineElement = document.querySelectorAll(".timeline-item");
     timelineElement.forEach((el) => {
-        if(this.isElementInView(el, 100)){
-          this.displayElementOnScroll(el);
-        } else {
-          this.hideElementOnScroll(el);
-        }
+      if (this.isElementInView(el, 100)) {
+        this.displayElementOnScroll(el);
+      } else {
+        this.hideElementOnScroll(el);
+      }
     });
   }
   displayElementOnScroll(el) {
@@ -42,13 +42,13 @@ class TimelineTree extends Component {
     const elementTop = el.getBoundingClientRect().top;
     return elementTop <= window.innerHeight - scrollOffset;
   }
-  handleGetListMember() {
+  async handleGetListMember() {
     const { listMembers } = this.props;
     if (listMembers.length === 0) return;
-    const listData = this.groupMemberDetailByDate(listMembers);
+    const listData = await this.groupMemberDetailByDate(listMembers);
     this.setState({ listItem: listData });
   }
-  groupMemberDetailByDate(list) {
+  async groupMemberDetailByDate(list) {
     const array = [];
     list.forEach((item, i) => {
       let dates = list[i].joinedDate.slice(4);
@@ -63,7 +63,10 @@ class TimelineTree extends Component {
         members: array[date],
       };
     });
-    return groupArrays;
+    const result = groupArrays.sort((a, b) => {
+      return new Date(a.joinedDate) - new Date(b.joinedDate);
+    });
+    return result;
   }
 
   render() {
@@ -98,5 +101,4 @@ class TimelineTree extends Component {
     );
   }
 }
-
 export default TimelineTree;

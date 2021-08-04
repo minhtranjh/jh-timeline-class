@@ -19,6 +19,7 @@ class MembersProvider extends Component {
     this.handleFindMemberByQuery = this.handleFindMemberByQuery.bind(this);
     this.handleFilterByFeature = this.handleFilterByFeature.bind(this);
     this.handleFilterByJoinedDate = this.handleFilterByJoinedDate.bind(this);
+    this.handleSetListMemberToState = this.handleSetListMemberToState.bind(this);
     this.firestore = firebase.firestore();
     this.membersTbRef = this.firestore.collection("members_tb");
     this.positionTbRef = this.firestore.collection("positions_tb");
@@ -67,8 +68,7 @@ class MembersProvider extends Component {
   }
   fetchMemberListFromFirebase() {
     this.setState({ isLoading: true });
-    const unsubscribe = this.membersTbRef
-      .orderBy("joinedDate")
+    const unsubscribe = this.membersTbRef.orderBy("joinedDate","asc")
       .onSnapshot((snap) => {
         const listMembers = [];
         let index = 0;
@@ -77,9 +77,14 @@ class MembersProvider extends Component {
           const member = { ...doc.data(), id: doc.id };
           const memberPosition = await this.getPositionById(member.position);
           const team = await this.getTeamById(member.teamId);
-          const leaderOfTeam = await this.getTeamNameByLeaderId(member.id);
-          if (team) {
+          let leaderOfTeam = await this.getTeamNameByLeaderId(member.id);
+          if (team&&team.name!="Operation Team") {
             managedBy = await this.getManagedByLeaderId(team.leaderId);
+          }
+          if(team&&team.name.toLowerCase().includes("operation")){
+            leaderOfTeam = {
+              name : "Operation Team"
+            }
           }
           const formattedJoinedDate = member.joinedDate.toDate().toDateString();
           listMembers.push({
@@ -151,7 +156,6 @@ class MembersProvider extends Component {
     });
   }
   handleFilterByFeature(featName, feat) {
-    console.log(featName,feat);
     if (!featName) {
       this.handlePagingListMember(1);
       return;
@@ -168,11 +172,7 @@ class MembersProvider extends Component {
       currentPage: 1,
     });
   }
-  getMemberFromListMember(id) {
-    const { listMembers } = this.state;
-    const memberDetails = listMembers.find((item) => item.id === id);
-    return memberDetails;
-  }
+ 
   async findMemberById(id) {
     this.setState({ isSpecificMemberLoading: true });
     const { listMembers } = this.state;
@@ -183,6 +183,11 @@ class MembersProvider extends Component {
       memberDetails = this.getMemberFromListMember(id);
     }
     this.setState({ isSpecificMemberLoading: false });
+    return memberDetails;
+  }
+  getMemberFromListMember(id) {
+    const { listMembers } = this.state;
+    const memberDetails = listMembers.find((item) => item.id === id);
     return memberDetails;
   }
   async fetchMemberFromFirebaseById(id) {

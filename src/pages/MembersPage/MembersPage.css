@@ -6,7 +6,8 @@
 }
 .list-head{
     display: flex;
-    align-items:flex-end;
+    align-items:flex-start;
+    flex-direction: column;
     color: white;
     margin-bottom: 30px;
     width:80%;
@@ -19,8 +20,14 @@
 }
 .filterOption{
     display: flex;
-    align-items:center;
     z-index: 1;
+    flex-direction: column;
+}
+.filterChoice{
+    margin: 5px 0;
+}
+.filterOption{
+    margin-bottom: 10px;
 }
 .showInBtn{
     margin-top: 10px;
@@ -40,10 +47,23 @@
 
 }
 .clearFilterButton{
+    width: 100px;
+}
+.clearFilterButton{
     margin-right: 20px;
 }
 @media screen and (min-width:768px) {
     .members{
         padding: 30px 100px;
+    }
+    .list-head{
+        flex-direction: row;
+        align-items:flex-end;
+    }
+    .filterOption{
+        flex-direction: row;
+    }
+    .filterChoice{
+        margin: 5px;
     }
 }

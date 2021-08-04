@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import Container from "../../components/Container/Container";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import FilterCalendar from "../../components/FilterCalendar/FilterCalendar";
@@ -20,6 +20,7 @@ class MembersPage extends Component {
       isFilterBarOpen: false,
       listType: "slider",
       isCalendarBarOpen: false,
+
     };
     this.handleToggleFilterBar = this.handleToggleFilterBar.bind(this);
     this.handleToggleSearchInput = this.handleToggleSearchInput.bind(this);
@@ -27,6 +28,7 @@ class MembersPage extends Component {
     this.handleToggleCalendarBar = this.handleToggleCalendarBar.bind(this);
     this.handleChangeListType = this.handleChangeListType.bind(this);
   }
+
   handleToggleFilterBar() {
     if (this.state.isSearchBarOpen) {
       this.toggleSearchInput();
@@ -92,6 +94,7 @@ class MembersPage extends Component {
     });
   }
   render() {
+
     const { listType } = this.state;
     return (
       <MembersContext.Consumer>
@@ -133,9 +136,7 @@ class MembersPage extends Component {
                 </div>
                 {listType === "table" && (
                   <div className=" filterOption">
-                    <button onClick={()=>handleFilterByFeature()} className="clearFilterButton filterButton">
-                      Clear
-                    </button>
+                    
                     <FilterCalendar
                       func={this.func}
                       handleFilterByJoinedDate={handleFilterByJoinedDate}
@@ -161,6 +162,9 @@ class MembersPage extends Component {
                       handleToggleSearchInput={this.handleToggleSearchInput}
                       handleFindMemberByQuery={handleFindMemberByQuery}
                     />
+                    <button onClick={()=>handleFilterByFeature()} className=" filterChoice clearFilterButton filterButton">
+                      Clear
+                    </button>
                   </div>
                 )}
               </div>
@@ -192,5 +196,4 @@ class MembersPage extends Component {
     );
   }
 }
-
 export default MembersPage;

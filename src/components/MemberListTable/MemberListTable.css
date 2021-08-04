@@ -1,5 +1,5 @@
 .list-wrapper {
-  height: 404px;
+  height: 416px;
   max-width: 330px;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -48,18 +48,18 @@
 
 @media screen and (min-width: 410px) {
   .list-wrapper {
-    max-width: 500px;
+    max-width: 550px;
   }
 }
 @media screen and (min-width: 748px) {
   .list-wrapper {
     max-width: 774px;
-    height: 554px;
+    height: 565px;
   }
 }
 @media screen and (min-width: 1024px) {
   .list-wrapper {
   max-width: 964px;
-    height: 554px;
+    height: 565px;
   }
 }

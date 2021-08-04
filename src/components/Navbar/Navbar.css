@@ -4,6 +4,7 @@
   width: 100vw;
   align-items: flex-end;
   padding: 30px 20px;
+  z-index: 9999;
 
 }
 .logo-area {
@@ -22,7 +23,7 @@
 }
 
 .hamburger-wrapper {
-  z-index: 9999;
+  z-index: 100000;
 }
 .navlist-wrapper {
   position: fixed;
@@ -30,7 +31,7 @@
   left: 0;
   display: flex;
   top: 0%;
-  z-index: 1;
+  z-index:9999;
   align-items: center;
   transition: all 0.5s;
   justify-content: center;

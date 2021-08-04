@@ -7,6 +7,7 @@ function Node(data, level) {
   this.data = data;
   this.level = level;
   this.children = [];
+  this.sibling = [];
 }
 class Tree {
   constructor() {
@@ -15,13 +16,18 @@ class Tree {
   add(data, toNodeData) {
     const node = new Node(data);
     const parent = toNodeData ? this.findBFS(toNodeData) : null;
-
     if (parent) {
       node.level = parent.level + 1;
       parent.children.push(node);
     } else {
-      if (!this.root) {
+      if (this.root && node.data.team.toLowerCase().includes("operation")) {
         node.level = 0;
+        let parent = this.root;
+        parent.sibling.push(node);
+        this.root = parent;
+      } else if (!this.root) {
+        node.level = 0;
+        node.sibling.push(node);
         this.root = node;
       } else return "Tried to store node as root when root already exists.";
     }
@@ -31,7 +37,13 @@ class Tree {
     let _node = null;
 
     this.traverseBFS((node) => {
-      if (node.data.id === data.id) {
+      if (node.sibling.length > 0) {
+        node.sibling.forEach((item) => {
+          if (item.data.id === data.id) {
+            _node = node;
+          }
+        });
+      } else if (node.data.id === data.id) {
         _node = node;
       }
     });
@@ -145,6 +157,7 @@ class MemberFamilyTree extends Component {
     const output = (
       <ul ref={ulRef} className="list">
         {children.map((child, index) => {
+          console.log(child);
           const liTagRef = React.createRef();
           return (
             <li
@@ -165,12 +178,37 @@ class MemberFamilyTree extends Component {
                 }}
                 to="#"
               >
-                <img className="nodeAvatar" src={child.data.picture} alt="" />
-                <div className="nodeDetails">
-                  <p>{child.data.name} </p>
-                  <p>
-                    {child.children.length > 0 ? `${child.data.leaderOf}` : " "}
-                  </p>
+                <div className="nodeSibling">
+                  {child.sibling.length > 0 ? (
+                    child.sibling.map((root) => (
+                      <>
+                        <img
+                          className="nodeAvatar"
+                          src={root.data.picture}
+                          alt=""
+                        />
+                        <div className="nodeDetails">
+                          <p>{root.data.name} </p>
+                        </div>
+                      </>
+                    ))
+                  ) : (
+                    <>
+                      <img
+                        className="nodeAvatar"
+                        src={child.data.picture}
+                        alt=""
+                      />
+                      <div className="nodeDetails">
+                        <p>{child.data.name} </p>
+                        <p>
+                          {child.children.length > 0
+                            ? `${child.data.leaderOf}`
+                            : " "}
+                        </p>
+                      </div>{" "}
+                    </>
+                  )}
                 </div>
               </NavLink>
               {child.children.length > 0

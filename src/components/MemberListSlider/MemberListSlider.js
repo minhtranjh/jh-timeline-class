@@ -82,7 +82,10 @@ class MemberListSlider extends Component {
                   key={item.id}
                   className="slide"
                 >
-                  <img className="slideImg" src={item.picture} alt="" />
+                  <div className="slideImg">
+                  <img src={item.picture} alt="" />
+
+                  </div>
                   <div className="slideDetails">
                     <p className="slideName">
                       {item.firstName}

@@ -22,6 +22,7 @@ class PaginationBar extends Component {
     let listLiTag = [];
     let numsBeforeCurrentPage = currentPage - 1;
     let numsAfterCurrentPage = currentPage + 1;
+    console.log(numsBeforeCurrentPage,numsAfterCurrentPage);
     if (currentPage > 1) {
       const prevButton = this.createPagingPrevButton(currentPage);
       listLiTag.push(prevButton);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import AnimatedLoadingIcon from "../AnimatedLoadingIcon/AnimatedLoadingIcon";
 import "./MemberFamilyTree.css";
+import { MembersContext } from "../../context/MembersContext";
 
 function Node(data, level) {
   this.data = data;
@@ -66,7 +67,7 @@ class Tree {
   }
 }
 
-class MemberFamilyTree extends Component {
+class MemberFamilyTreeComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -118,6 +119,12 @@ class MemberFamilyTree extends Component {
       ulElement.classList.toggle("isActive");
     }
   }
+  handleDecreaseTreeWidth() {
+    document.querySelector(".treeWrap").classList.add("resized");
+  }
+  handleIncreaseTreeWidth() {
+    document.querySelector(".treeWrap").classList.remove("resized");
+  }
   toggleChildren(liRef, level) {
     let toggleChildrenTimeout = setTimeout(() => {
       const element = liRef.current;
@@ -126,16 +133,28 @@ class MemberFamilyTree extends Component {
         if (el.style.display === "none") {
           el.style.animation = "showChild .6s";
           el.style.display = "inline-table";
+          this.resizeTreeWidth()
         } else {
           el.style.animation = "hideChild .3s ";
           let displayNoneTimeout = setTimeout(() => {
             el.style.display = "none";
+          this.resizeTreeWidth()
+
             clearTimeout(displayNoneTimeout);
           }, 300);
         }
         clearTimeout(toggleChildrenTimeout);
       });
     }, 300);
+  }
+  resizeTreeWidth() {
+    const treeWidth = document.querySelector(".level0_0").clientWidth;
+    const bodyWidth = document.body.clientWidth;
+    if (treeWidth + 400 >= bodyWidth) {
+      this.handleDecreaseTreeWidth();
+    } else {
+      this.handleIncreaseTreeWidth();
+    }
   }
   debounce(func, timeout = 300) {
     if (this.debounceTimeout) {
@@ -154,10 +173,10 @@ class MemberFamilyTree extends Component {
   }
   createHtmlForMemberTree(children) {
     const ulRef = React.createRef();
+
     const output = (
       <ul ref={ulRef} className="list">
         {children.map((child, index) => {
-          console.log(child);
           const liTagRef = React.createRef();
           return (
             <li
@@ -181,7 +200,7 @@ class MemberFamilyTree extends Component {
                 <div className="nodeSibling">
                   {child.sibling.length > 0 ? (
                     child.sibling.map((root) => (
-                      <>
+                      <React.Fragment key={root.data.id}>
                         <img
                           className="nodeAvatar"
                           src={root.data.picture}
@@ -190,7 +209,7 @@ class MemberFamilyTree extends Component {
                         <div className="nodeDetails">
                           <p>{root.data.name} </p>
                         </div>
-                      </>
+                      </React.Fragment>
                     ))
                   ) : (
                     <>
@@ -233,6 +252,21 @@ class MemberFamilyTree extends Component {
           <AnimatedLoadingIcon />
         )}
       </>
+    );
+  }
+}
+
+class MemberFamilyTree extends Component {
+  render() {
+    return (
+      <MembersContext.Consumer>
+        {({ isLoading, listMembers }) => (
+          <MemberFamilyTreeComponent
+            isLoading={isLoading}
+            listMembers={listMembers}
+          />
+        )}
+      </MembersContext.Consumer>
     );
   }
 }

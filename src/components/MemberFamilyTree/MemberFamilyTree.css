@@ -23,6 +23,7 @@
   margin: 0 10px;
 }
 .nodeDetails{
+  transition: all 0.5s;
   display: flex;
   flex-direction: column;
 }
@@ -94,7 +95,7 @@
   height: 20px;
 }
 .familyTree a {
-  
+  transition: all 0.5s;
   border: 1px solid var(--font-white);
   border-radius: 5px;
   padding: 5px 10px;
@@ -134,7 +135,17 @@
   width: 50px;
   margin-right: 10px;
   height:50px;
+  transition: all 0.5s;
   border-radius: 50%;
+}
+.treeWrap.resized a{
+  padding: 0;
+}
+.treeWrap.resized .nodeDetails{
+  display:none;
+}
+.treeWrap.resized .nodeAvatar{
+  margin-right: 0;
 }
 @media screen and (min-width: 768px) {
   .familyTree ul{

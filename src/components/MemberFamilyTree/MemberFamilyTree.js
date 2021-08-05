@@ -129,17 +129,16 @@ class MemberFamilyTreeComponent extends Component {
     let toggleChildrenTimeout = setTimeout(() => {
       const element = liRef.current;
       let liTagsElement = element.querySelectorAll(`.level${level}_${level}`);
-      liTagsElement.forEach((el) => {
+      liTagsElement.forEach((el, index) => {
         if (el.style.display === "none") {
           el.style.animation = "showChild .6s";
           el.style.display = "inline-table";
-          this.resizeTreeWidth()
+          this.resizeTreeWidth(level);
         } else {
           el.style.animation = "hideChild .3s ";
           let displayNoneTimeout = setTimeout(() => {
             el.style.display = "none";
-          this.resizeTreeWidth()
-
+            this.resizeTreeWidth(level);
             clearTimeout(displayNoneTimeout);
           }, 300);
         }
@@ -147,10 +146,8 @@ class MemberFamilyTreeComponent extends Component {
       });
     }, 300);
   }
-  resizeTreeWidth() {
-    const treeWidth = document.querySelector(".level0_0").clientWidth;
-    const bodyWidth = document.body.clientWidth;
-    if (treeWidth + 400 >= bodyWidth) {
+  resizeTreeWidth(level) {
+    if (level>0) {
       this.handleDecreaseTreeWidth();
     } else {
       this.handleIncreaseTreeWidth();
@@ -200,7 +197,7 @@ class MemberFamilyTreeComponent extends Component {
                 <div className="nodeSibling">
                   {child.sibling.length > 0 ? (
                     child.sibling.map((root) => (
-                      <React.Fragment key={root.data.id}>
+                      <div className="sib" key={root.data.id}>
                         <img
                           className="nodeAvatar"
                           src={root.data.picture}
@@ -209,7 +206,7 @@ class MemberFamilyTreeComponent extends Component {
                         <div className="nodeDetails">
                           <p>{root.data.name} </p>
                         </div>
-                      </React.Fragment>
+                      </div>
                     ))
                   ) : (
                     <>
@@ -219,7 +216,7 @@ class MemberFamilyTreeComponent extends Component {
                         alt=""
                       />
                       <div className="nodeDetails">
-                        <p>{child.data.name} </p>
+                        {/* <p>{child.data.name} </p> */}
                         <p>
                           {child.children.length > 0
                             ? `${child.data.leaderOf}`

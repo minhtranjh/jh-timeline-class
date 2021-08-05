@@ -15,12 +15,18 @@
   transition: all 0.5s;
   display:flex;
 }
+.sib{
+  flex-direction: column;
+
+}
 .nodeSibling{
   align-items: center;
+  flex-direction: column;
+  padding: 3px;
   display: flex;
 }
 .nodeSibling div{
-  margin: 0 10px;
+  margin: 5px 10px;
 }
 .nodeDetails{
   transition: all 0.5s;
@@ -104,6 +110,7 @@
   color: var(--font-white);
   display: inline-flex;
 }
+
 @keyframes setHeight{
   0% {
     height:  0;
@@ -142,7 +149,7 @@
   padding: 0;
 }
 .treeWrap.resized .nodeDetails{
-  display:none;
+  display:flex;
 }
 .treeWrap.resized .nodeAvatar{
   margin-right: 0;

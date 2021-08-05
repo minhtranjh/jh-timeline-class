@@ -68,7 +68,7 @@ class FilterBar extends Component {
     } = this.props;
     const { filterName, filters, currentFilterIndex, isFieldOpen } = this.state;
     return (
-      <div className=" filterChoice filterBar">
+      <div className="filterChoice filterBar">
         <button onClick={handleToggleFilterBar} className="filterButton">
           <i className="fas fa-filter"></i>
         </button>

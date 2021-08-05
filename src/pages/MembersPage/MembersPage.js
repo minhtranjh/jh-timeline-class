@@ -135,7 +135,7 @@ class MembersPage extends Component {
                   </div>
                 </div>
                 {listType === "table" && (
-                  <div className=" filterOption">
+                  <div className="filterOption">
                     
                     <FilterCalendar
                       func={this.func}

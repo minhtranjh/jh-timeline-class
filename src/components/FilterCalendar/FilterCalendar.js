@@ -17,7 +17,7 @@ class FilterCalendar extends Component {
   }
   render() {
     const { value } = this.state;
-    const { handleToggleCalendarBar,handleFilterByJoinedDate } = this.props;
+    const { handleToggleCalendarBar } = this.props;
     return (
       <div className="filterChoice calendarBar">
         <button onClick={handleToggleCalendarBar} className="filterButton">
@@ -25,7 +25,7 @@ class FilterCalendar extends Component {
         </button>
         <input
           value={value}
-          onChange={handleFilterByJoinedDate}
+          onChange={this.handleOnChange}
           className="searchInput"
           type="month"
           name="joinedDate"

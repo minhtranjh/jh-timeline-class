@@ -1,5 +1,5 @@
 .timeline-card {
-  min-width: 130px;
+  width: 250px;
   cursor: pointer;
   top: 0;
   transition: all 0.5s;
@@ -87,11 +87,10 @@
 }
 @media screen and (min-width: 768px) {
   .timeline-card {
-    min-width: 200px;
+    width: 200px;
   }
   .timeline-card {
     position: absolute;
-    max-width: 170px;
     cursor: pointer;
     top: 0;
     color: var(--font-green);

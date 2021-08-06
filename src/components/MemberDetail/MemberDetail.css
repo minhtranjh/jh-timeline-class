@@ -64,6 +64,12 @@
 .gallarySlider .pictureWrap{
   margin-right: 30px;
 }
+.pictureWrap{
+  max-width: 500px;
+}
+.pictureImg{
+  border-radius: 5px;
+}
 .gallarySlider img{
   width: 80vw;
 }

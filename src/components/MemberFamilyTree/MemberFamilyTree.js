@@ -217,11 +217,9 @@ class MemberFamilyTreeComponent extends Component {
                       />
                       <div className="nodeDetails">
                         {/* <p>{child.data.name} </p> */}
-                        <p>
                           {child.children.length > 0
-                            ? `${child.data.leaderOf}`
+                            ? <p>{child.data.leaderOf}</p> 
                             : " "}
-                        </p>
                       </div>{" "}
                     </>
                   )}

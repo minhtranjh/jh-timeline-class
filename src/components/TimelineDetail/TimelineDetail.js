@@ -17,7 +17,9 @@ class TimelineDetail extends Component {
           <span>Lorem ipsum dolor sit, ameptatum blanditiis?</span>
           <div className="listImage">
             {members.map((item) => (
-              <img className="detailImage" src={item.picture} alt="" />
+              <div className="detailImage">
+                <img src={item.picture} alt={item.firstName + "avatar"} />
+              </div>
             ))}
           </div>
         </div>

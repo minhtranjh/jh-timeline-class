@@ -78,11 +78,18 @@
   margin-top: 10px;
 }
 .detailImage{
-  width: 40px;
-  margin-right:5px;
-  height: 40px;
+  width: 60px;
+  display: inline-flex;
+
+  margin-right:8px;
+  height: 60px;
   background-color: var(--bg-green);
   object-fit: contain;
+}
+.detailImage img{
+  width: 100%;
+  object-fit:cover;
+  height: 100%;
   border-radius: 50%;
 }
 @media screen and (min-width: 768px) {
